@@ -8,15 +8,26 @@
 #
 # <Match id: 1, winner: "Adam", loser: "Bob", created_at: "2011-07-08 00:21:06", updated_at: "2011-07-08 00:21:06", occured_at: "2011-07-07 20:20:59">
 #
-adam = Player.create(name: "Adam")
-bob = Player.create(name: "Bob")
-carol = Player.create(name: "Carol")
-dave = Player.create(name: "Dave")
-ed = Player.create(name: "Ed")
-Match.create(winner: adam, loser: bob)
-Match.create(winner: bob, loser: carol)
-Match.create(winner: carol, loser: dave)
-Match.create(winner: dave, loser: ed)
-Match.create(winner: adam, loser: carol)
-Match.create(winner: adam, loser: dave)
-Match.create(winner: adam, loser: ed)
+@players = [ Player.create(name: "Alice"),
+             Player.create(name: "Bob"),
+             Player.create(name: "Carol"),
+             Player.create(name: "Dave"),
+             Player.create(name: "Eve"),
+             Player.create(name: "Mallory"),
+             Player.create(name: "Peggy")
+           ]
+
+def rand_match(time)
+  player_one = @players[rand(@players.size)]
+  player_two = @players[rand(@players.size)]
+  while player_one == player_two 
+    player_two = @players[rand(@players.size)]
+  end
+  Match.create(winner: player_one, loser: player_two, occured_at: time)
+end
+
+# Make up two weeks worth of matches to play around with.
+14.downto(0) do |i|
+  8.times { rand_match( Time.now - i.days ) }
+end
+
