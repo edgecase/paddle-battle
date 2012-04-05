@@ -4,7 +4,12 @@
   });
   
 = form_for(@match) do |f|
-  = text_field_tag :winner_name, "", autocomplete: "off"
-  def.
-  = text_field_tag :loser_name, "", autocomplete: "off"
+  .player-details
+    = text_field_tag :winner_name, "", autocomplete: "off", placeholder: "Winner", class: "name"
+    = text_field_tag :winner_score, '', placeholder: "0", maxlength: 2, class: "score"
+  #taunt has defeated
+  .player-details
+    = text_field_tag :loser_name, "", autocomplete: "off", placeholder: "Loser", class: "name"
+    = text_field_tag :loser_score, '', placeholder: "0", maxlength: 2, class: "score"
+  
   = submit_tag "Add"
