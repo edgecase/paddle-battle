@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title PongLeaf #{yield :title}
+    %title Paddle Battle - #{yield :title}
     = stylesheet_link_tag 'reset', 'pong', 'jquery.autocomplete'
     = javascript_include_tag :defaults
     = javascript_include_tag 'jquery.autocomplete', 'jquery.tabs'
@@ -11,7 +11,7 @@
   %body
     #page
       %header
-        %h1 PongLeaf
+        %h1 Paddle Battle
         %nav
           = link_to_with_current "Rankings", root_path
           = link_to_with_current "Matches", matches_path
@@ -20,5 +20,5 @@
       = render 'shared/flash_messages'
       = yield
       %footer
-        = link_to "source code", "https://github.com/scarr2508/pongleaf"
+        = link_to "source code", "https://github.com/edgecase/paddle-battle"
         = link_to "elo rating system", "http://en.wikipedia.org/wiki/Elo_rating_system"
