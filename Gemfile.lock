@@ -31,6 +31,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.2.6)
     arel (2.2.1)
+    awesome_print (1.0.2)
     builder (3.0.0)
     diff-lcs (1.1.3)
     elo (0.1.0)
@@ -122,6 +123,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   elo
   haml-rails
   heroku
