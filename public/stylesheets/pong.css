@@ -121,11 +121,11 @@ form input {
 }
 
 input.name {
-  width: 86%;
+  width: 60%;
 }
 
 input.score {
-  width: 8%;
+  width: 6%;
 }
 
 input[type='submit'] {

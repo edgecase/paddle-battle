@@ -11,6 +11,7 @@ group :test, :development do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 2.4'
   gem 'awesome_print'
+  gem 'ruby-debug19', "~> 0.11.6"
 end
 
 group :production do

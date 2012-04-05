@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405154137) do
+ActiveRecord::Schema.define(:version => 20120405184638) do
+
+  create_table "games", :force => true do |t|
+    t.integer  "match_id"
+    t.integer  "winner_id"
+    t.integer  "winner_score"
+    t.integer  "loser_id"
+    t.integer  "loser_score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "games", ["loser_id"], :name => "index_games_on_loser_id"
+  add_index "games", ["winner_id"], :name => "index_games_on_winner_id"
 
   create_table "matches", :force => true do |t|
     t.datetime "created_at"

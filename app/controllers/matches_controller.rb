@@ -4,24 +4,31 @@ class MatchesController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
 
   def create
-    match = {}
-    match[:winner] = Player.find_or_create_by_name(params[:winner_name].downcase)
-    match[:loser] = Player.find_or_create_by_name(params[:loser_name].downcase)
+    match = Match.new(occured_at: params[:occured_at])
+    match.winner_score = 0
+    match.loser_score = 0
 
-    params[:winner_score] = nil if params[:winner_score].blank?
-    params[:loser_score] = nil if params[:loser_score].blank?
-    if params[:winner_score] or params[:loser_score]
-      match[:winner_score] = params[:winner_score] || 0
-      match[:loser_score]  = params[:loser_score]  || 0
+    player_one = Player.find_or_create_by_name(params[:one_name].downcase)
+    player_two = Player.find_or_create_by_name(params[:two_name].downcase)
+
+    5.times do |i|
+      unless params["game_#{i}_score_one"].to_i == 0 and params["game_#{i}_score_two"].to_i == 0
+        if (params["game_#{i}_score_one"].to_i) > (params["game_#{i}_score_two"].to_i)
+          match.games.build(winner: player_one, winner_score: params["game_#{i}_score_one"].to_i,
+                            loser:  player_two, loser_score:  params["game_#{i}_score_two"].to_i)
+        else
+          match.games.build(winner: player_two, winner_score: params["game_#{i}_score_two"].to_i,
+                            loser:  player_one, loser_score:  params["game_#{i}_score_one"].to_i)
+        end
+      end
     end
     
-    if match[:winner].valid? &&match[:loser].valid?
-      match = Match.new(match)
+    if match.valid? && match.winner.valid? && match.loser.valid?
       match.save!
       EloRatings.add_match(match)
-      flash.notice = "Successfully added match between #{params[:winner_name]} and #{params[:loser_name]}"
+      flash.notice = "Successfully added match between #{params[:one_name]} and #{params[:two_name]}"
     else
-      flash.alert = "Must specify a winner and a loser to post a match."
+      flash.alert = "Must specify a winner and a loser to post a match. Match.valid? #{match.valid?}"
     end
     redirect_to :back
   end
