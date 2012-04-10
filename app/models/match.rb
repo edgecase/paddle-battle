@@ -12,6 +12,18 @@ class Match < ActiveRecord::Base
 
   MATCH_SIZE = 5
 
+  def game_scores
+    self.games.map do |game|
+      if game.winner == self.winner
+        "#{game.winner_score}-#{game.loser_score}"
+      elsif game.winner == self.loser
+        "#{game.loser_score}-#{game.winner_score}"
+      else
+        raise "Game winner did not play in this match. Data corruption likely."
+      end
+    end.join(' ')
+  end
+
   private
 
   def set_default_occured_at_date

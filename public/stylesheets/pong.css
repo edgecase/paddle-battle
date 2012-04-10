@@ -95,11 +95,16 @@ li, td {
 }
 
 #matches td.name, #matches th.name {
-  width: 150px;
+  width: 120px;
 }
 
 #matches td.score, #matches th.score {
-  width: 60px;
+  width: 150px;
+}
+
+#matches td.game-scores {
+  display: none;
+  font-size: 12px;
 }
 
 #matches td.action, #matches th.action {

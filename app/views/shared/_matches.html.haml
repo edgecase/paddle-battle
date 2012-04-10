@@ -22,8 +22,11 @@
           (
           = link_to("vs.", player_path(@player.id, :vs => m.loser_id))
           )
-      %td.score
+      %td.match-score.score
         - if m.winner_score?
           = "#{m.winner_score} - #{m.loser_score}"
+      %td.game-scores.score
+        - if m.games.first
+          = m.game_scores
       %td.action
         = link_to "delete", match_path(m), method: :delete

@@ -12,4 +12,10 @@ $(document).ready( function(){
       $(e.target).val('11');
     }
   });
+
+  $('#matches').on('click', '.score', function(e){
+    var $match = $(e.target).parent('tr');
+    $match.find('.match-score').toggle();
+    $match.find('.game-scores').toggle();
+  });
 });
