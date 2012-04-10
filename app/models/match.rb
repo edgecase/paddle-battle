@@ -10,6 +10,8 @@ class Match < ActiveRecord::Base
   before_validation :set_default_occured_at_date, on: :create
   before_validation :determine_winner
 
+  MATCH_SIZE = 5
+
   private
 
   def set_default_occured_at_date
