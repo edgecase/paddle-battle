@@ -107,6 +107,18 @@ li, td {
   font-size: 12px;
 }
 
+#matches td.game-scores span { 
+  margin-right: 4px;
+}
+
+#matches td.game-scores span.win {
+  color: #050;
+}
+
+#matches td.game-scores span.loss {
+  color: #700;
+}
+
 #matches td.action, #matches th.action {
   font-size: 12px;
   text-align: center;

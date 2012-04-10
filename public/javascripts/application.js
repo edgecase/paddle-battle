@@ -13,9 +13,17 @@ $(document).ready( function(){
     }
   });
 
-  $('#matches').on('click', '.score', function(e){
+  var $matches = $('#matches')
+    , show_match_scores = true;
+
+  $matches.on('click', 'td.score', function(e){
     var $match = $(e.target).parent('tr');
-    $match.find('.match-score').toggle();
-    $match.find('.game-scores').toggle();
+    $match.find('.score').toggle();
+  });
+
+  $matches.on('click', 'th.score', function(e) {
+    show_match_scores = !show_match_scores;
+    $matches.find('td.match-score').toggle(show_match_scores);
+    $matches.find('td.game-scores').toggle(!show_match_scores);
   });
 });

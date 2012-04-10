@@ -15,13 +15,13 @@ class Match < ActiveRecord::Base
   def game_scores
     self.games.map do |game|
       if game.winner == self.winner
-        "#{game.winner_score}-#{game.loser_score}"
+        [game.winner_score, game.loser_score, :win]
       elsif game.winner == self.loser
-        "#{game.loser_score}-#{game.winner_score}"
+        [game.loser_score, game.winner_score, :loss]
       else
         raise "Game winner did not play in this match. Data corruption likely."
       end
-    end.join(' ')
+    end
   end
 
   private

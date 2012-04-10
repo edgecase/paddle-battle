@@ -27,6 +27,6 @@
           = "#{m.winner_score} - #{m.loser_score}"
       %td.game-scores.score
         - if m.games.first
-          = m.game_scores
+          = format_game_scores m.game_scores
       %td.action
         = link_to "delete", match_path(m), method: :delete
