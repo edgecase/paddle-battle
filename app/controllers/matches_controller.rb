@@ -11,7 +11,7 @@ class MatchesController < ApplicationController
     player_one = Player.find_or_create_by_name(params[:one_name].downcase)
     player_two = Player.find_or_create_by_name(params[:two_name].downcase)
 
-    5.times do |i|
+    Match::MATCH_SIZE.times do |i|
       unless params["game_#{i}_score_one"].to_i == 0 and params["game_#{i}_score_two"].to_i == 0
         if (params["game_#{i}_score_one"].to_i) > (params["game_#{i}_score_two"].to_i)
           match.games.build(winner: player_one, winner_score: params["game_#{i}_score_one"].to_i,
@@ -28,7 +28,7 @@ class MatchesController < ApplicationController
       EloRatings.add_match(match)
       flash.notice = "Successfully added match between #{params[:one_name]} and #{params[:two_name]}"
     else
-      flash.alert = "Must specify a winner and a loser to post a match. Match.valid? #{match.valid?}"
+      flash.alert = "Must specify a winner and a loser to post a match. #{match.errors.messages.inspect}"
     end
     redirect_to :back
   end

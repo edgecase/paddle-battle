@@ -4,14 +4,14 @@
   });
 
 = form_for(@match) do |f|
-  .player-details
+  #winner.player-details
     = text_field_tag :one_name, "", autocomplete: "off", placeholder: "Winner", class: "name"
-    - 5.times do |i|
-      = text_field_tag "game_#{i}_score_one", '', placeholder: "0", maxlength: 2, class: "score"
+    - Match::MATCH_SIZE.times do |i|
+      = text_field_tag "game_#{i}_score_one", '', autocomplete: 'off', placeholder: '0', maxlength: 2, class: "score"
   #taunt has defeated
-  .player-details
+  #loser.player-details
     = text_field_tag :two_name, "", autocomplete: "off", placeholder: "Loser", class: "name"
-    - 5.times do |i|
-      = text_field_tag "game_#{i}_score_two", '', placeholder: "0", maxlength: 2, class: "score"
+    - Match::MATCH_SIZE.times do |i|
+      = text_field_tag "game_#{i}_score_two", '', autocomplete: 'off', placeholder: "0", maxlength: 2, class: "score"
   
   = submit_tag "Add"

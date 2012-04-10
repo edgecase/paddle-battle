@@ -10,7 +10,7 @@ class Match < ActiveRecord::Base
   before_validation :set_default_occured_at_date, on: :create
   before_validation :determine_winner
 
-  MATCH_SIZE = 5
+  MATCH_SIZE = 3
 
   private
 
@@ -27,11 +27,8 @@ class Match < ActiveRecord::Base
       self.games.each do |g|
         if g.winner == one
           match_score[:one] += 1
-        elsif g.winner == two
+        else # if g.winner == two
           match_score[:two] += 1
-        else
-          puts "OH NO! One of the players should be the winner!"
-          require 'ruby-debug';debugger;
         end
       end
 
@@ -46,7 +43,7 @@ class Match < ActiveRecord::Base
         self.winner_score = match_score[:two]
         self.loser_score  = match_score[:one]
       end
-      puts "MATCH BEFORE VALIDATION: #{self.inspect}"
+
     end
     
   end

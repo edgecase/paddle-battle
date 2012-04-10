@@ -5,4 +5,11 @@ $(document).ready( function(){
   window.setTimeout(function() {  
     $('#flash-messages').hide();
   }, 30000);
+
+  $('#new_match #winner .score').on('focus', function(e) {
+    var score = $(e.target).val();
+    if(!score){
+      $(e.target).val('11');
+    }
+  });
 });
