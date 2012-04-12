@@ -15,7 +15,7 @@ class PlayersController < ApplicationController
   
   def show
     @player = Player.find(params[:id])
-    @matches = @player.matches.includes([:winner, :loser]).order("occured_at desc")
+    @matches = @player.matches.order("occured_at desc")
     if params[:vs]
       @vs = Player.find(params[:vs])
       @matches.reject!{|m| ![m.winner_id, m.loser_id].include?(@vs.id)}

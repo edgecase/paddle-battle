@@ -3,9 +3,9 @@ class Match < ActiveRecord::Base
   validates :loser,       presence: true
   validates :occured_at,  presence: true
 
-  belongs_to :winner, :class_name => 'Player'
-  belongs_to :loser, :class_name => 'Player'
-  has_many   :games, inverse_of: :match
+  belongs_to :winner, class_name: 'Player'
+  belongs_to :loser,  class_name: 'Player'
+  has_many   :games,  inverse_of: :match
 
   before_validation :set_default_occured_at_date, on: :create
   before_validation :determine_winner

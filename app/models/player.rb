@@ -1,7 +1,9 @@
 class Player < ActiveRecord::Base
-  has_many :winning_matches, :class_name => 'Match', :foreign_key => 'winner_id'
-  has_many :losing_matches, :class_name => 'Match', :foreign_key => 'loser_id'
-  has_many :games
+  has_many :winning_matches, class_name: 'Match', foreign_key: 'winner_id'
+  has_many :losing_matches,  class_name: 'Match', foreign_key: 'loser_id'
+
+  has_many :winning_games, class_name: 'Game', foreign_key: 'winner_id'
+  has_many :losing_games,  class_name: 'Game', foreign_key: 'loser_id'
 
   before_validation :downcase_name
 
@@ -25,6 +27,14 @@ class Player < ActiveRecord::Base
     Match.where(['winner_id = ? OR loser_id = ?', id, id]).order('occured_at desc')
   end
 
+  def games
+    Game.where(['winner_id = ? OR loser_id = ?', id, id])
+  end
+
+  def ordered_games
+    Game.joins(:match).where(['matches.winner_id = ? OR matches.loser_id = ?', id, id]).order('matches.occured_at desc, games.id desc')
+  end
+  
   def inactive?
     !active?
   end
