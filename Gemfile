@@ -1,17 +1,25 @@
 source 'http://rubygems.org'
 
-gem 'rake', '< 0.9'
+gem 'rake'
+gem 'heroku'
+
 gem 'rails'
 gem 'haml-rails'
-gem 'heroku'
 gem 'jquery-rails'
+
 gem 'elo'
+
+
+group :assets do
+  gem 'sass-rails'
+  gem 'uglifier'
+end
 
 group :test, :development do
   gem 'sqlite3'
-  gem 'rspec-rails', '~> 2.4'
+  gem 'rspec-rails'
   gem 'awesome_print'
-  gem 'ruby-debug19', "~> 0.11.6"
+  gem 'ruby-debug19'
 end
 
 group :production do

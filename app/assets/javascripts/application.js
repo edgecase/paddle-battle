@@ -1,3 +1,7 @@
+//= require jquery
+//= require jquery.tabs
+//= require_self
+
 $(document).ready( function(){
   $('.tab-bar').tabs();
   
