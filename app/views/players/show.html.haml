@@ -7,22 +7,27 @@
     data.addColumn('date', 'Date');
     data.addColumn('number', 'Rating');
     data.addRows([
-      #{@ratings_by_date.map{|date, rating| "[new Date(#{(date-1.month).strftime("%Y,%m,%d")}), #{rating}]"}.join(',')}
+      #{@ratings_by_date.map{|date, rating| "[new Date(#{(date-1.month).strftime("%Y,%m,%d,%H,%M")}), #{rating}]"}.join(',')}
     ]);
 
-    var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
+    var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('chart'));
     chart.draw(data, {displayAnnotations: false, displayRangeSelector: false, scaleType: 'maximized', scaleColumns: [], numberFormats: "0", colors: ['#3A74BA']});
   }
 
 - content_for :title, "Player: #{@player.display_name}"
 
-%h2
-  = "#{@player.display_name}'s Match History #{" vs. #{@vs.display_name}" if @vs}"
-  %br
-  = "Record: #{@num_wins} - #{@num_loses}"
-  %br
-  = "Elo Rating: #{@elo_player.rating}"
+.row
+  %h2.span4
+    = "#{@player.display_name}'s Match History #{" vs. #{@vs.display_name}" if @vs}"
 
-#chart_div{:style => "width:550px; height:200px; margin: 0 0 20px -5px;"}
+.row
+  %h2.span4
+    = "Elo Rating: #{@elo_player.rating}"
+  %h2.span4
+    = "Record: #{@num_wins} - #{@num_loses}"
 
-= render(:partial => "shared/matches")
+.row
+  #chart.span8
+
+.row
+  = render(:partial => "shared/matches")

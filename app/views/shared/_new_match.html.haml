@@ -1,17 +1,12 @@
-:javascript
-  $(function() {
-    $("#one_name").focus();
-  });
-
-= form_for(@match) do |f|
+= form_for(@match, html: {class: 'span8'}) do |f|
   #winner.player-details
-    = text_field_tag :one_name, "", autocomplete: "off", placeholder: "Winner", class: "name"
+    = text_field_tag :one_name, "", autocomplete: "off", placeholder: "Winner", class: "name span4"
     - Match::MATCH_SIZE.times do |i|
-      = text_field_tag "game_#{i}_score_one", '', autocomplete: 'off', placeholder: '0', maxlength: 2, class: "score"
+      = text_field_tag "game_#{i}_score_one", '', autocomplete: 'off', placeholder: '0', maxlength: 2, class: "score span1"
   #taunt has defeated
   #loser.player-details
-    = text_field_tag :two_name, "", autocomplete: "off", placeholder: "Loser", class: "name"
+    = text_field_tag :two_name, "", autocomplete: "off", placeholder: "Loser", class: "name span4"
     - Match::MATCH_SIZE.times do |i|
-      = text_field_tag "game_#{i}_score_two", '', autocomplete: 'off', placeholder: "0", maxlength: 2, class: "score"
+      = text_field_tag "game_#{i}_score_two", '', autocomplete: 'off', placeholder: "0", maxlength: 2, class: "score span1"
   
   = submit_tag "Add"

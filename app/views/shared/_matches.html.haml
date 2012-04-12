@@ -1,30 +1,33 @@
-%table#matches
-  %tr
-    %th.date Date
-    %th.name Winner
-    %th.name Loser
-    %th.score Score
-    %th.action
+%table#matches.table.table-striped.table-condensed.span8
+  %thead
+    %tr
+      %th.date Date
+      %th.name Winner
+      %th.name Loser
+      %th.score Match Score
+      %th.score Game Scores
+      %th.action
 
-  - @matches.each do |m|
-    %tr.match-details{class: cycle("even", "odd")}
-      %td.date
-        = m.occured_at.strftime("%Y-%m-%d")
-      %td.name
-        = link_to(m.winner.display_name, player_path(m.winner_id))
-        - if @vs.nil? && @player && @player.id != m.winner_id
-          (
-          = link_to("vs.", player_path(@player.id, :vs => m.winner_id))
-          )
-      %td.name
-        = link_to(m.loser.display_name, player_path(m.loser_id))
-        - if @vs.nil? && @player && @player.id != m.loser_id
-          (
-          = link_to("vs.", player_path(@player.id, :vs => m.loser_id))
-          )
-      %td.match-score.score
-        = "#{m.winner_score} - #{m.loser_score}"
-      %td.game-scores.score
-        = format_game_scores m.game_scores
-      %td.action
-        = link_to "delete", match_path(m), method: :delete
+  %tbody      
+    - @matches.each do |m|
+      %tr.match-details{class: cycle("even", "odd")}
+        %td.date
+          = m.occured_at.strftime("%Y-%m-%d")
+        %td.name
+          = link_to(m.winner.display_name, player_path(m.winner_id))
+          - if @vs.nil? && @player && @player.id != m.winner_id
+            (
+            = link_to("vs.", player_path(@player.id, :vs => m.winner_id))
+            )
+        %td.name
+          = link_to(m.loser.display_name, player_path(m.loser_id))
+          - if @vs.nil? && @player && @player.id != m.loser_id
+            (
+            = link_to("vs.", player_path(@player.id, :vs => m.loser_id))
+            )
+        %td.match-score.score
+          = "#{m.winner_score} - #{m.loser_score}"
+        %td.game-scores.score
+          = format_game_scores m.game_scores
+        %td.action
+          = link_to "delete", match_path(m), method: :delete

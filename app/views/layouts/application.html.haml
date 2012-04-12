@@ -8,16 +8,23 @@
     = csrf_meta_tag
 
   %body
-    #page
-      %header
-        %h1 Paddle Battle
-        %nav
-          = link_to_with_current "Rankings", root_path
-          = link_to_with_current "Matches", matches_path
-          = link_to_with_current "Distribution", distribution_path
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to 'Paddle Battle', root_path, class: 'brand'
+          %ul.nav
+            %li= link_to_with_current "Rankings", root_path
+            %li= link_to_with_current "Matches", matches_path
+            %li= link_to_with_current "Distribution", distribution_path
+          %ul.nav.pull-right
+            %li= link_to "Source Code", "https://github.com/edgecase/paddle-battle"
+            %li= link_to "Elo Rating System", "http://en.wikipedia.org/wiki/Elo_rating_system"
 
-      = render 'shared/flash_messages'
-      = yield
-      %footer
-        = link_to "source code", "https://github.com/edgecase/paddle-battle"
-        = link_to "elo rating system", "http://en.wikipedia.org/wiki/Elo_rating_system"
+    .container
+      .row
+        .span8
+          = render 'shared/flash_messages'
+      .row
+        .span8
+          = yield
+

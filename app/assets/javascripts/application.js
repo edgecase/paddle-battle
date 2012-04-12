@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery.tabs
+//= require twitter/bootstrap
 //= require_self
 
 $(document).ready( function(){
@@ -17,17 +17,17 @@ $(document).ready( function(){
     }
   });
 
-  var $matches = $('#matches')
-    , show_match_scores = true;
+  // var $matches = $('#matches')
+  //   , show_match_scores = true;
 
-  $matches.on('click', 'td.score', function(e){
-    var $match = $(e.target).parent('tr');
-    $match.find('.score').toggle();
-  });
+  // $matches.on('click', 'td.score', function(e){
+  //   var $match = $(e.target).parent('tr');
+  //   $match.find('.score').toggle();
+  // });
 
-  $matches.on('click', 'th.score', function(e) {
-    show_match_scores = !show_match_scores;
-    $matches.find('td.match-score').toggle(show_match_scores);
-    $matches.find('td.game-scores').toggle(!show_match_scores);
-  });
+  // $matches.on('click', 'th.score', function(e) {
+  //   show_match_scores = !show_match_scores;
+  //   $matches.find('td.match-score').toggle(show_match_scores);
+  //   $matches.find('td.game-scores').toggle(!show_match_scores);
+  // });
 });

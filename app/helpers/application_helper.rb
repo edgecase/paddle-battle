@@ -1,7 +1,13 @@
 module ApplicationHelper
-  def link_to_with_current(name, url)
-    options = (current_page? url) ? { class: "current" } : {}
-    link_to name, url, options
+  def link_to_with_current(name, url, opts={})
+    if current_page? url
+      if opts[:class].blank?
+        opts[:class] = 'active'
+      else
+        opts[:class] += ' active'
+      end
+    end
+    link_to name, url, opts
   end
 
   def format_game_scores(scores)

@@ -1,7 +1,11 @@
 - content_for :title, "Matches"
 
-= render(:partial => "shared/new_match")
+.row
+  = render(:partial => "shared/new_match")
 
-%h2 Match history
+.row
+  %h2.span8
+    Match History
 
-= render(:partial => "shared/matches")
+.row
+  = render(:partial => "shared/matches")
