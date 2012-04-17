@@ -10,7 +10,7 @@ class Match < ActiveRecord::Base
   before_validation :set_default_occured_at_date, on: :create
   before_validation :determine_winner
 
-  MATCH_SIZE = 5
+  MATCH_SIZE = 3
 
   def game_scores
     self.games.map do |game|
@@ -31,7 +31,7 @@ class Match < ActiveRecord::Base
   end
 
   def determine_winner
-    if self.winner.blank? or self.loser.blank?
+    if(self.winner.blank? or self.loser.blank?) and !self.games.blank?
       one = self.games.first.winner
       two  = self.games.first.loser
       match_score  = {one: 0, two: 0}

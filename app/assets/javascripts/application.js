@@ -2,32 +2,32 @@
 //= require twitter/bootstrap
 //= require_self
 
-$(document).ready( function(){
-  $('.tab-bar').tabs();
-  
+$(function(){
   // Hide flash messages after 30 seconds
-  window.setTimeout(function() {  
+  window.setTimeout(function() {
     $('#flash-messages').hide();
   }, 30000);
 
-  $('#new_match #winner .score').on('focus', function(e) {
-    var score = $(e.target).val();
+  $('#one_name').focus();
+
+  var autofillWin = function($el) {
+    var score = $el.val();
     if(!score){
-      $(e.target).val('11');
+      $el.val('11');
     }
+  };
+
+  $('#new_match .game').one('focus', '.score', function(e) {
+    autofillWin($(e.target));
   });
 
-  // var $matches = $('#matches')
-  //   , show_match_scores = true;
+  $('#add-game').on('click', function(e) {
+    var $game = $('#new_match .game:last');
+    var $new = $game.clone().find('input').val('').end();
+    $new.one('focus', '.score', function(e) {
+      autofillWin($(e.target));
+    });
+    $game.after($new);
+  });
 
-  // $matches.on('click', 'td.score', function(e){
-  //   var $match = $(e.target).parent('tr');
-  //   $match.find('.score').toggle();
-  // });
-
-  // $matches.on('click', 'th.score', function(e) {
-  //   show_match_scores = !show_match_scores;
-  //   $matches.find('td.match-score').toggle(show_match_scores);
-  //   $matches.find('td.game-scores').toggle(!show_match_scores);
-  // });
 });

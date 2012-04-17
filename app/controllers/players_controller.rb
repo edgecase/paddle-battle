@@ -14,6 +14,7 @@ class PlayersController < ApplicationController
   end
   
   def show
+    @match = Match.new
     @player = Player.find(params[:id])
     @matches = @player.matches.order("occured_at desc")
     if params[:vs]

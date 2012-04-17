@@ -22,9 +22,10 @@
 
     .container
       .row
-        .span8
+        .span10
           = render 'shared/flash_messages'
       .row
         .span8
           = yield
+        = render(:partial => "shared/new_match")
 

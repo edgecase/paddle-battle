@@ -11,24 +11,33 @@ class MatchesController < ApplicationController
     player_one = Player.find_or_create_by_name(params[:one_name].downcase)
     player_two = Player.find_or_create_by_name(params[:two_name].downcase)
 
-    Match::MATCH_SIZE.times do |i|
-      unless params["game_#{i}_score_one"].to_i == 0 and params["game_#{i}_score_two"].to_i == 0
-        if (params["game_#{i}_score_one"].to_i) > (params["game_#{i}_score_two"].to_i)
-          match.games.build(winner: player_one, winner_score: params["game_#{i}_score_one"].to_i,
-                            loser:  player_two, loser_score:  params["game_#{i}_score_two"].to_i)
-        else
-          match.games.build(winner: player_two, winner_score: params["game_#{i}_score_two"].to_i,
-                            loser:  player_one, loser_score:  params["game_#{i}_score_one"].to_i)
+    if player_one.valid? and player_two.valid?
+      params[:game_score_one].zip(params[:game_score_two]).each do |score_one, score_two|
+        one = score_one.to_i
+        two = score_two.to_i
+
+        unless one == 0 and two == 0
+          if one > two
+            match.games.build(winner: player_one, winner_score: one,
+                              loser:  player_two, loser_score:  two)
+          else
+            match.games.build(winner: player_two, winner_score: two,
+                              loser:  player_one, loser_score:  one)
+          end
         end
       end
-    end
-    
-    if match.valid? && match.winner.valid? && match.loser.valid?
-      match.save!
-      EloRatings.add_match(match)
-      flash.notice = "Successfully added match between #{params[:one_name]} and #{params[:two_name]}"
+
+      if match.games.size == 0
+        flash.alert = "Must enter at least one game to post a match."
+      elsif match.valid? && match.winner.valid? && match.loser.valid?
+        match.save!
+        EloRatings.add_match(match)
+        flash.notice = "Successfully added match between #{params[:one_name]} and #{params[:two_name]}"
+      else
+        flash.alert = "Must specify a winner and a loser to post a match. #{match.errors.messages.inspect}"
+      end
     else
-      flash.alert = "Must specify a winner and a loser to post a match. #{match.errors.messages.inspect}"
+      flash.alert = "Must specify players to post a match."
     end
     redirect_to :back
   end

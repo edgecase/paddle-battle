@@ -1,12 +1,22 @@
-= form_for(@match, html: {class: 'span8'}) do |f|
-  #winner.player-details
-    = text_field_tag :one_name, "", autocomplete: "off", placeholder: "Winner", class: "name span4"
+#new-match-panel.span2
+  %h2 New Match
+  = form_for(@match) do |f|
+    .row
+      .span1
+        = text_field_tag :one_name, "", autocomplete: "off", placeholder: "Player 1", class: "span1"
+      .span1
+        = text_field_tag :two_name, "", autocomplete: "off", placeholder: "Player 2", class: "span1"
     - Match::MATCH_SIZE.times do |i|
-      = text_field_tag "game_#{i}_score_one", '', autocomplete: 'off', placeholder: '0', maxlength: 2, class: "score span1"
-  #taunt has defeated
-  #loser.player-details
-    = text_field_tag :two_name, "", autocomplete: "off", placeholder: "Loser", class: "name span4"
-    - Match::MATCH_SIZE.times do |i|
-      = text_field_tag "game_#{i}_score_two", '', autocomplete: 'off', placeholder: "0", maxlength: 2, class: "score span1"
-  
-  = submit_tag "Add"
+      .row.game
+        .span1
+          = text_field_tag "game_score_one[]", '', autocomplete: 'off', placeholder: '0', maxlength: 2, class: "score one span1", id: nil
+        .span1
+          = text_field_tag "game_score_two[]", '', autocomplete: 'off', placeholder: "0", maxlength: 2, class: "score two span1", id: nil
+    .row
+      .span1
+        %a#add-game.btn.btn-info.btn-mini{href:'#'}
+          %i.icon-plus 
+          Game
+    .row
+      .span2
+        = submit_tag "Save Match", class: "btn btn-success span2"
