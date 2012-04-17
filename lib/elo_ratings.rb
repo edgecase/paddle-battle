@@ -33,7 +33,6 @@ class EloRatings
     local_players = Hash.new
     all_matches = Match.order("occured_at asc")
     ratings = {}
-    require 'ruby-debug'; debugger;
     all_matches.each_with_index do |match, idx|
       add_match_to_players(match, local_players)
       if ([match.winner_id, match.loser_id].include?(player_id))

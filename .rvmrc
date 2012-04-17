@@ -1,1 +1,1 @@
-rvm --create ruby-1.9.2@paddlebattle
+rvm --create ruby-1.9.3@paddlebattle

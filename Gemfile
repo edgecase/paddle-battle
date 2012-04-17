@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rake'
 gem 'heroku'
+gem 'thin'
 
 gem 'rails'
 gem 'haml-rails'
@@ -20,7 +21,13 @@ group :test, :development do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'awesome_print'
-  gem 'ruby-debug19'
+
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  gem 'pry-remote'
+  gem 'pry-nav'
+  # gem 'pry-stack_explorer'
 end
 
 group :production do
