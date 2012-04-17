@@ -16,7 +16,7 @@
             %th Name
             %th Win - Loss
             %th Elo Rating
-        - i = 0
+        - i = 1
         - @ratings.each do |player_id, elo_player|
           - next if @players_by_id[player_id].most_recent_match.occured_at < 30.days.ago
           %tr.player
@@ -36,7 +36,7 @@
             %th Name
             %th Win - Loss
             %th Elo Rating
-        - i = 0
+        - i = 1
         - @ratings.each do |player_id, elo_player|
           %tr.player
             %td.rank= "#{i}."
