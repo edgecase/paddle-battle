@@ -3,9 +3,9 @@
   = form_for(@match) do |f|
     .row
       .span1
-        = text_field_tag :one_name, "", autocomplete: "off", placeholder: "Player 1", class: "span1"
+        = text_field_tag :one_name, "", autocomplete: "off", placeholder: "Player 1", class: "span1", data: {provide: 'typeahead', source: Player.active_names}
       .span1
-        = text_field_tag :two_name, "", autocomplete: "off", placeholder: "Player 2", class: "span1"
+        = text_field_tag :two_name, "", autocomplete: "off", placeholder: "Player 2", class: "span1", data: {provide: 'typeahead', source: Player.active_names}
     - Match::MATCH_SIZE.times do |i|
       .row.game
         .span1
