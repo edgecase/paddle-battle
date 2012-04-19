@@ -8,6 +8,7 @@ gem 'rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
+gem 'omniauth-openid'
 
 gem 'elo'
 
