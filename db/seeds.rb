@@ -17,13 +17,27 @@
              Player.create(name: "Peggy")
            ]
 
+def rand_game(match, player_one, player_two)
+  w = 11
+  l = 11 - (rand(5) + 1)
+  if rand > 0.75
+    match.games.build(winner: player_one, winner_score: w,
+                      loser:  player_two,  loser_score: l)
+  else
+    match.games.build(winner: player_two, winner_score: w,
+                      loser:  player_one,  loser_score: l)
+  end
+end
+
 def rand_match(time)
   player_one = @players[rand(@players.size)]
   player_two = @players[rand(@players.size)]
   while player_one == player_two 
     player_two = @players[rand(@players.size)]
   end
-  Match.create(winner: player_one, loser: player_two, occured_at: time)
+  match = Match.new(winner_score: 0, loser_score: 0, occured_at: time)
+  3.times { |i| rand_game(match, player_one, player_two) }
+  match.save!
 end
 
 # Make up two weeks worth of matches to play around with.
