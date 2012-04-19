@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405184638) do
+ActiveRecord::Schema.define(:version => 20120419155628) do
+
+  create_table "admins", :force => true do |t|
+    t.string   "email",                :default => "", :null => false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "authentication_token"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "admins", ["authentication_token"], :name => "index_admins_on_authentication_token", :unique => true
+  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
 
   create_table "games", :force => true do |t|
     t.integer  "match_id"
@@ -19,27 +35,27 @@ ActiveRecord::Schema.define(:version => 20120405184638) do
     t.integer  "winner_score"
     t.integer  "loser_id"
     t.integer  "loser_score"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   add_index "games", ["loser_id"], :name => "index_games_on_loser_id"
   add_index "games", ["winner_id"], :name => "index_games_on_winner_id"
 
   create_table "matches", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.datetime "occured_at"
     t.integer  "winner_id"
     t.integer  "loser_id"
-    t.integer  "winner_score"
-    t.integer  "loser_score"
+    t.integer  "winner_score", :default => 0
+    t.integer  "loser_score",  :default => 0
   end
 
   create_table "players", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "rank"
     t.boolean  "active",         :default => true
     t.integer  "initial_rating"

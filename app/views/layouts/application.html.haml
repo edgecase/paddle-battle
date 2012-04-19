@@ -19,6 +19,10 @@
           %ul.nav.pull-right
             %li= link_to "Source Code", "https://github.com/edgecase/paddle-battle"
             %li= link_to "Elo Rating System", "http://en.wikipedia.org/wiki/Elo_rating_system"
+            - if admin_signed_in?
+              %li= link_to "Sign Out", destroy_admin_session_path
+            - else
+              %li= link_to "Sign In", "/admins/auth/google/"
 
     .container
       .row

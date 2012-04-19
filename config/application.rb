@@ -44,7 +44,8 @@ module Pong
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.version = '1.0'
-    
+    config.assets.initialize_on_precompile = false
+
     Elo.configure do |config|
       # Every player starts with a rating of 1000
       config.default_rating = 1000
@@ -55,6 +56,6 @@ module Pong
       # A player is considered a new, when he/she has played less than 30 games
       config.starter_boundry = 30
     end
-    
+
   end
 end
