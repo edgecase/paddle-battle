@@ -12,5 +12,9 @@ Pong::Application.routes.draw do
 
   match '/distribution' => 'players#distribution', :as => 'distribution'
 
+  scope "/api" do
+    match "players" => "players#api_index"
+  end
+
   root to: 'players#rankings'
 end
