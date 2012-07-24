@@ -1,0 +1,6 @@
+%tr.player
+  %td.rank= "#{i+1}."
+  %td.name= link_to(ranking.player.display_name, player_path(ranking.player.id))
+  %td.rating
+    = "#{ranking.wins}-#{ranking.losses}"
+  %td.rating= ranking.rating

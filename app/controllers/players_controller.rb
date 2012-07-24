@@ -1,6 +1,7 @@
 require 'elo_ratings'
 
 class PlayersController < ApplicationController
+  respond_to :html, :json
 
   def index
     if params[:q]
@@ -37,14 +38,14 @@ class PlayersController < ApplicationController
 
   def rankings
     @match = Match.new
-    @ratings = EloRatings.players_by_rating
-    @players_by_id = Player.all.index_by{|p| p.id}
+    @rankings = Ranking.all
+    respond_with(@rankings)
   end
 
   def distribution
-    rankings
-    @ratings.reject!{|player_id, _| @players_by_id[player_id].most_recent_match.occured_at < 30.days.ago}
-    @top_n = params[:n] ? params[:n].to_i : @ratings.size
+    @match = Match.new
+    @rankings = Ranking.recent
+    @top_n = params[:n] ? params[:n].to_i : @rankings.size
   end
 
   private

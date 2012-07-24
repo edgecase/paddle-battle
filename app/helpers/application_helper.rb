@@ -17,4 +17,12 @@ module ApplicationHelper
 
     raw(spans)
   end
+
+  def distribution_data(rankings, top_n)
+    i = 0
+    rankings.map do |ranking|
+      i += 1
+      [i, ranking.rating, "#{i}. #{ranking.player.display_name} - #{ranking.rating}"]
+    end
+  end
 end
