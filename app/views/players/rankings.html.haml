@@ -27,6 +27,5 @@
             %th Name
             %th Win - Loss
             %th Elo Rating
-        - @rankings.reject(&:recent?).each_with_index do |ranking, i|
+        - @rankings.each_with_index do |ranking, i|
           = render :partial => 'ranking', :locals => {:ranking => ranking, :i => i}
-
