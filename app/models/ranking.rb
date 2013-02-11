@@ -47,6 +47,7 @@ class Ranking
   def as_json(options)
     {
       player_name:  player.display_name,
+      player_id:    player.id,
       wins:         wins,
       losses:       losses,
       games_played: games_played,

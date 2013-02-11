@@ -14,6 +14,7 @@ Pong::Application.routes.draw do
 
   scope "/api" do
     match "players" => "players#api_index"
+    match "players/:id" => "players#api_show"
     match "rankings" => "players#rankings"
   end
 

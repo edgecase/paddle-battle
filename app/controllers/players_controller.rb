@@ -19,6 +19,37 @@ class PlayersController < ApplicationController
   end
 
   def show
+    load_for_show
+  end
+
+  def api_show
+    load_for_show
+    render json: {
+      player: @player.as_json,
+      vs: @vs,
+      matches: @matches,
+      num_wins: @num_wins,
+      num_loses: @num_loses,
+      elo_player_rating: @elo_player.rating,
+      ratings_by_date: @ratings_by_date,
+    }
+  end
+
+  def rankings
+    @match = Match.new
+    @rankings = Ranking.all
+    respond_with(@rankings)
+  end
+
+  def distribution
+    @match = Match.new
+    @rankings = Ranking.recent
+    @top_n = params[:n] ? params[:n].to_i : @rankings.size
+  end
+
+  private
+
+  def load_for_show
     @match = Match.new
     @player = Player.find(params[:id])
     @matches = @player.matches.order("occured_at desc")
@@ -36,19 +67,6 @@ class PlayersController < ApplicationController
     @ratings_by_date = EloRatings.ratings_by_date(@player.id)
   end
 
-  def rankings
-    @match = Match.new
-    @rankings = Ranking.all
-    respond_with(@rankings)
-  end
-
-  def distribution
-    @match = Match.new
-    @rankings = Ranking.recent
-    @top_n = params[:n] ? params[:n].to_i : @rankings.size
-  end
-
-  private
 
   def format_names(names)
     names.collect(&:downcase).sort.uniq.collect(&:titleize)
